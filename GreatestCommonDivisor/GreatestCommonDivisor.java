@@ -39,6 +39,21 @@ public class GreatestCommonDivisor {
     return greatestCommonDivisorRecursive(x, y, 0);
   }
 
+  private static int euclideanGreatestCommonDivisor(int x, int y) {
+    // Ensure x is always greater than y
+    if (x < y) {
+      int temp = x;
+      x = y;
+      y = temp;
+    }
+
+    if (x % y == 0) {
+      return y;
+    } else {
+      return euclideanGreatestCommonDivisor(y, x % y);
+    }
+  }
+
   public static void main(String[] args) {
     // (10, 5) return 5
     // (15, 9) return 3
@@ -51,5 +66,9 @@ public class GreatestCommonDivisor {
     System.out.println(greatestCommonDivisorRecursive(15, 9));
     System.out.println(greatestCommonDivisorRecursive(101, 100));
     System.out.println(greatestCommonDivisorRecursive(1482, 819));
+    System.out.println(euclideanGreatestCommonDivisor(1482, 819));
+    System.out.println(euclideanGreatestCommonDivisor(10, 5));
+    System.out.println(euclideanGreatestCommonDivisor(15, 9));
+    System.out.println(euclideanGreatestCommonDivisor(101, 100));
   }
 }
