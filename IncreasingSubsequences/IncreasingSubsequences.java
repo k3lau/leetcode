@@ -42,8 +42,32 @@ public class IncreasingSubsequences {
     return countSeq;
   }
 
+  static int increasingSubRecursive(int[] inputArr, int index, int[] countArr) {
+    if (index == 0) {
+      countArr[index] = 1;
+    } else {
+      for (int j = 0; j < index; j++) {
+        if (inputArr[j] < inputArr[index]) {
+          countArr[index] += 1;
+        }
+      }
+      // countArr[index] += countArr[index - 1];
+    }
+    int result = countArr[index];
+    if (index < inputArr.length - 1) {
+      result += increasingSubRecursive(inputArr, index + 1, countArr);
+    }
+
+    return result;
+  }
+
   public static void main(String[] args) {
-    int[] inputArr = { 3, 5, 6, 8, 9, 3, 2, 1, 2, 3 };
-    System.out.println(increasingSubsequence(inputArr));
+    // int[] inputArr = { 3, 5, 6, 8, 9, 3, 2, 1, 2, 3 };
+
+    // System.out.println(increasingSubsequence(inputArr));
+    int[] inputArr = { 3, 5, 2, 8 };
+    // int[] countArr = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    int[] countArr = new int[] { 0, 0, 0, 0 };
+    System.out.println((increasingSubRecursive(inputArr, 0, countArr)));
   }
 }
